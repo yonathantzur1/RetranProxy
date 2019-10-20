@@ -9,7 +9,7 @@ module.exports = {
         timeout: 10000 // milliseconds
     },
     retran: {
-        maxReSend: 100,
+        maxReSend: 20,
         reSendDelayCost: 60000, // milliseconds
         reSendScanInterval: 60000 // milliseconds
     }
