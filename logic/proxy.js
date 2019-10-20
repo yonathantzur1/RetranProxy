@@ -22,8 +22,7 @@ module.exports = (req, res) => {
 
     if (data) {
         options.headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': Buffer.byteLength(data)
+            'Content-Type': 'application/json',
         };
     }
 

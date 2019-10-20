@@ -7,7 +7,7 @@ module.exports = {
         sendObj.time = new Date();
         sendObj.counter = sendObj.counter ? sendObj.counter++ : 1;
 
-        if (sendObj.counter <= config.retran.maxSendTries) {
+        if (sendObj.counter <= config.retran.maxReSend) {
             queue.push(sendObj);
         }
     },
@@ -23,24 +23,20 @@ module.exports = {
 }
 
 function reSend() {
-    let deleteIndexes = [];
-
     for (let i = 0; i < queue.length; i++) {
-        let sendObj = queue[i];
+        let sendObj = queue.splice(i, 1)[0];
 
         let sendTime = sendObj.time.getTime();
-        let sendTimeDelay = sendObj.counter * 30000;
+        let sendTimeDelay = sendObj.counter * config.retran.reSendDelayCost;
         let sendTimeDate = new Date(sendTime + sendTimeDelay);
 
         if (sendTimeDate < new Date()) {
             require('./sender')(sendObj);
-            deleteIndexes.push(i);
+        }
+        else {
+            queue.unshift(sendObj);
         }
     }
-
-    deleteIndexes.forEach(index => {
-        queue.splice(index, 1);
-    })
 }
 
-setInterval(reSend, config.retran.scanReSendInterval);
+setInterval(reSend, config.retran.reSendScanInterval);
