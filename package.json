@@ -1,5 +1,5 @@
 {
-  "name": "retransmission-proxy",
+  "name": "retran-proxy",
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"nodemon server.js\" \"nodemon test.js\" "
