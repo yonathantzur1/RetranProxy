@@ -1,16 +1,16 @@
 {
   "name": "retransmission-proxy",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "concurrently \"nodemon server.js\" \"nodemon test.js\" "
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "concurrently": "^5.0.0",
     "nodemon": "^1.19.4"
   }
 }

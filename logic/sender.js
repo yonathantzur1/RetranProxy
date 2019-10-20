@@ -1,34 +1,41 @@
 const http = require('http');
+const enums = require('../enums');
+const retran = require('./retran');
+const uuid = require('uuid/v1');
 
-module.exports = {
-    sendReq(options, data) {
-        const req = http.request(options, (res) => {
-            if (res.statusCode != 200) {
-                handleError(options);
-            }
+module.exports = (sendObj) => {
+    (!sendObj.uuid) && (sendObj.uuid = uuid());
 
-            res.setEncoding('utf8');
+    const req = http.request(sendObj.options, (res) => {
+        switch (res.statusCode) {
+            case enums.HTTP_ERROR.OK:
+                retran.end(sendObj);
+                break;
+            case enums.HTTP_ERROR.NOT_FOUND:
+                // In case the route was not found,
+                // do nothing.
+                break;
+            default:
+                // In case of error code.
+                handleError(sendObj, "Request error code " + res.statusCode);
+                break;
+        }
+    });
 
-            res.on('end', () => {
-                console.log('No more data in response.');
-            });
-        });
+    req.on('timeout', () => {
+        req.abort();
+    });
 
-        req.on('timeout', () => {
-            req.abort();
-        });
+    req.on('error', (err) => {
+        handleError(sendObj, err.message);
+    });
 
-        req.on('error', (e) => {
-            handleError(options);
-        });
+    // Write data to request body.
+    sendObj.data && req.write(sendObj.data);
 
-        // Write data to request body.
-        data && req.write(data);
-
-        req.end();
-    }
+    req.end();
 }
 
-function handleError(options) {
-    let x = options;
+function handleError(sendObj, err) {
+    retran.insert(sendObj);
 }

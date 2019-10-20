@@ -4,3 +4,8 @@ exports.REST = Object.freeze({
     PUT: "PUT",
     DELETE: "DELETE"
 });
+
+exports.HTTP_ERROR = Object.freeze({
+    OK: 200,
+    NOT_FOUND: 404
+});

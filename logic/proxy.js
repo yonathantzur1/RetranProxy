@@ -1,5 +1,3 @@
-const sender = require('./sender');
-
 const enums = require('../enums');
 const config = require('../config');
 
@@ -29,5 +27,7 @@ module.exports = (req, res) => {
         };
     }
 
-    sender.sendReq(options, data);
+    let sendObj = { options, data };
+
+    require('./sender')(sendObj);
 }

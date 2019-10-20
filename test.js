@@ -16,21 +16,21 @@ http.listen(8000, () => {
 });
 
 app.get('/testGet', (req, res) => {
-    let x = 1;
+    console.log("testGet");
     res.end();
 });
 
 app.post('/testPost', (req, res) => {
-    let x = 1;
+    console.log("testPost");
     res.end();
 });
 
 app.put('/testPut', (req, res) => {
-    let x = 1;
+    console.log("testPut");
     res.end();
 });
 
 app.delete('/testDelete', (req, res) => {
-    let x = 1;
+    console.log("testDelete");
     res.end();
 });
