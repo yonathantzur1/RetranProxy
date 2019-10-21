@@ -15,28 +15,28 @@ http.listen(8000, () => {
     console.log("Test server is up!");
 });
 
-app.get('/get', (req, res) => {
+app.get('/test', (req, res) => {
     console.log("get route");
     console.log("params: " + JSON.stringify(req.query));
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     res.end();
 });
 
-app.post('/post', (req, res) => {
+app.post('/test', (req, res) => {
     console.log("post route");
     console.log("params: " + JSON.stringify(req.body));
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     res.end();
 });
 
-app.put('/put', (req, res) => {
+app.put('/test', (req, res) => {
     console.log("put route");
     console.log("params: " + JSON.stringify(req.body));
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     res.end();
 });
 
-app.delete('/delete', (req, res) => {
+app.delete('/test', (req, res) => {
     console.log("delete route");
     console.log("params: " + JSON.stringify(req.query));
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

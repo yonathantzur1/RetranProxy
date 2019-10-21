@@ -1,5 +1,6 @@
 const enums = require('../enums');
 const config = require('../config');
+const sender = require('./sender');
 
 module.exports = (req, res) => {
     res.end();
@@ -17,7 +18,7 @@ module.exports = (req, res) => {
         port: config.target.port,
         path,
         method,
-        timeout: config.target.timeout
+        timeout: config.target.timeout * 1000
     };
 
     if (data) {
@@ -28,5 +29,5 @@ module.exports = (req, res) => {
 
     let sendObj = { options, data };
 
-    require('./sender')(sendObj);
+    sender(sendObj);
 }

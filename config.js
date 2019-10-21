@@ -6,11 +6,10 @@ module.exports = {
     target: {
         address: "localhost",
         port: "8000",
-        timeout: 10000 // milliseconds
+        timeout: 10 // seconds
     },
     retran: {
-        maxReSend: 20,
-        reSendDelayCost: 60000, // milliseconds
-        reSendScanInterval: 60000 // milliseconds
+        maxSendTries: 15,
+        sendDelay: 60, // seconds
     }
 }
